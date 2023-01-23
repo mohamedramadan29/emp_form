@@ -56,7 +56,7 @@
                 $daam_start_date = $_POST['daam_start_date'];
                 $daam_end_date = $_POST['daam_end_date'];
                 $expire_month_reminder = $_POST['expire_month_reminder'];
-                $daam_status = $_POST['daam_status'];
+                //$daam_status = $_POST['daam_status'];
                 $notes = $_POST['notes'];
 
                 $stmt = $connect->prepare("UPDATE emp_form SET exper_school=?,insurance_start_date_m=?,
@@ -64,20 +64,20 @@
                     electronic_contract_start_h=?,electronic_contract_end_m=?,electronic_contract_end_h=?,
                     basic_salary=?,housing=?,other_earns=?,total=?,insurance_deduce=?,net_of_insurance=?,
                     cash=?,total_get=?,daam_ability=?,daam_kind=?,daam_start_date=?,
-                    daam_end_date=?,expire_month_reminder=?,daam_status=?,notes=? WHERE emp_id=?");
+                    daam_end_date=?,expire_month_reminder=?,notes=? WHERE emp_id=?");
                 $stmt->execute(array(
                     $exper_school, $insurance_start_date_m,
                     $insurance_start_date_h, $job_in_insurance, $electronic_contract_start_m,
                     $electronic_contract_start_h, $electronic_contract_end_m, $electronic_contract_end_h,
                     $basic_salary, $housing, $other_earns, $total, $insurance_deduce, $net_of_insurance,
                     $cash, $total_get, $daam_ability, $daam_kind, $daam_start_date,
-                    $daam_end_date, $expire_month_reminder, $daam_status, $notes,$emp_id
+                    $daam_end_date, $expire_month_reminder, $notes, $emp_id
                 ));
-                if($stmt){?>
+                if ($stmt) { ?>
                     <div class="container">
                         <div class="alert alert-success"> تم تعديل واضافة البيانات بنجاح </div>
                     </div>
-                    <?php
+            <?php
                 }
             }
 
@@ -341,14 +341,37 @@
                             <label class="form-label"> إجمالي المُستلم ( Total Get ) <span class="star"> * </span></label>
                             <input type="text" class="total_get" name="total_get" id="total_get" value="<?php echo $emp_data['total_get']; ?>" />
                         </div>
-                        <div class="form-group">
+                        <div class="form-group"> <!-- daam_elig  -->
                             <label class="form-label"> أهلية الدعم ( Daam Ability ) <span class="star"> * </span></label>
-                            <input type="text" name="daam_ability" id="daam_ability" value="<?php echo $emp_data['daam_ability']; ?>" />
+                            <select name="daam_ability" id="daam_ability">
+                                <option value=""> -- اختر -- </option>
+                                <?php
+                                $stmt = $connect->prepare("SELECT * FROM daam_elig");
+                                $stmt->execute();
+                                $alldata = $stmt->fetchAll();
+                                foreach ($alldata as $data) { ?>
+                                    <option <?php if ($data['name'] == $emp_data['daam_ability']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+                            <?php ?>
                         </div>
-
-                        <div class="form-group">
+                        <div class="form-group"> <!-- Support -->
                             <label class="form-label">نوع الدعم ( Daam Kind ) <span class="star"> * </span></label>
-                            <input type="text" name="daam_kind" id="daam_kind" value="<?php echo $emp_data['daam_kind']; ?>" />
+                            <select name="daam_kind" id="daam_kind">
+                                <option value=""> -- اختر -- </option>
+                                <?php
+                                $stmt = $connect->prepare("SELECT * FROM daam_support");
+                                $stmt->execute();
+                                $alldata = $stmt->fetchAll();
+                                foreach ($alldata as $data) { ?>
+                                    <option <?php if ($data['name'] == $emp_data['daam_kind']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
+                                <?php
+                                }
+                                ?>
+                            </select>
+
                         </div>
                         <div class="form-group">
                             <label class="form-label"> تاريخ بداية الدعم ( Daam Start Date ) <span class="star"> * </span></label>
@@ -362,7 +385,35 @@
                             <label class="form-label"> متبقى على نهاية الدعم ( Expire Month Reminder ) (بالايام) <span class="star"> * </span></label>
                             <input type="text" class="expire_month_reminder" name="expire_month_reminder" id="expire_month_reminder" value="<?php echo $emp_data['expire_month_reminder']; ?>" />
                         </div>
+                        <div class="form-group">
+                            <label class="form-label">حالة الدعم( Daam Status ) </label>
+                            <p class="daam_status">
+                                <?php
+                                if ($emp_data['expire_month_reminder'] >= 180) { ?>
+                                    <span style="background-color: green;"> </span>
+                                <?php
 
+                                } elseif ($emp_data['expire_month_reminder'] >= 90 || $emp_data['expire_month_reminder'] <= 179) {
+                                ?>
+                                    <span style="background-color: yellow;"> </span>
+                                <?php
+                                } elseif ($emp_data['expire_month_reminder'] <= 90) {
+                                ?>
+                                    <span style="background-color: red;"> </span>
+                                <?php
+                                } else {
+                                ?>
+                                    <span style="background-color: black;"> </span>
+
+                                <?php
+                                }
+
+
+                                ?>
+
+                            </p>
+                        </div>
+                        <!--
                         <div class="form-group">
                             <label for="daam_status" class="form-label">حالة الدعم( Daam Status )<span class="star"> * </span> </label>
                             <select name="daam_status" id="daam_status">
@@ -372,6 +423,7 @@
                                 <option <?php if ($emp_data['daam_status'] == 'اخضر') echo 'selected'; ?> value="اخضر"> اخضر </option>
                             </select>
                         </div>
+                            -->
                         <div class="form-group">
                             <label class="form-label"> ملاحظات (Notes) <span class="star"> * </span></label>
                             <textarea name="notes" id="" class="form-control"> <?php echo $emp_data['notes']; ?></textarea>

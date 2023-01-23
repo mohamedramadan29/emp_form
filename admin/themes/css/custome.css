@@ -2572,3 +2572,10 @@ label small {
 }
  
 /* END ALL MESSAGE PAGE */
+.daam_status span{
+  width: 100px;
+  height: 40px;
+  background-color: red;
+  display: block;
+  border-radius: 5px;
+}
