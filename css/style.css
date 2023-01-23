@@ -1006,11 +1006,13 @@ input[type=file] {
   margin-top: 10px;
   margin-bottom: 10px;
 }
-label.error{
+
+label.error {
   position: relative;
 }
+
 .btn-primary,
-.btn-warning{
+.btn-warning {
   width: 140px;
   height: 50px;
   color: #fff;
@@ -1022,19 +1024,23 @@ label.error{
   font-size: 16px;
   font-family: 'Noto Kufi Arabic', sans-serif !important;
 }
-.btn-warning{
-  background-color:#e74c3c;
+
+.btn-warning {
+  background-color: #e74c3c;
   border-color: #e74c3c;
 }
+
 a[href$="#finish"] {
-display: none !important;
+  display: none !important;
 }
-input[type=radio]{
+
+input[type=radio] {
   width: 20px;
   height: 20px;
   margin-right: 30px;
 }
-.check_box_items .form-check{
+
+.check_box_items .form-check {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -1043,6 +1049,44 @@ input[type=radio]{
 }
 
 #checked_input,
-#checked_input2{
+#checked_input2 {
   display: none;
+}
+
+.form-label {
+  color: #657293 !important;
+}
+
+.select2-container--default .select2-selection--single {
+  border: 1px solid #efefef;
+  height: 50px;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+  line-height: 45px;
+  text-align: right;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  top: 8px;
+}
+
+.select2-results__option {
+  text-align: right;
+}
+
+.iban {
+  position: relative;
+}
+
+.iban .iban_span {
+  position: absolute;
+  top: 37px;
+  right: 1px;
+  display: block;
+  background: #bfbfbf;
+  padding: 13px;
+}
+.iban input{
+  padding-right: 50px;
 }

@@ -10,6 +10,7 @@
     <!-- Font Icon -->
     <link rel="stylesheet" href="fonts/material-icon/css/material-design-iconic-font.min.css">
     <link rel="stylesheet" href="vendor/nouislider/nouislider.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Google   font  -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,16 +24,25 @@
         <div class="container">
             <div class="header_form">
                 <div class="">
-                    <p> الإدارة العامة لمدارس
-                        الفرقان والفضل بن العباس والبتول
-                        ( إدارة الموارد البشرية ) </p>
+                    <h4> استمارة بيانات موظف </h4>
                 </div>
+
                 <div>
-                    للعام الدراسي 2022-2023 م 1444-1445 هـ
+                    <?php
+                    include "connect.php";
+                    $stmt = $connect->prepare("SELECT * FROM select_year");
+                    $stmt->execute();
+                    $data = $stmt->fetch();
+
+
+                    ?>
+                    <?php echo $data['text']; ?>
                 </div>
 
                 <div class="">
-                    <h4> استمارة بيانات موظف </h4>
+                    <p> الإدارة العامة لمدارس
+                        الفرقان والفضل بن العباس والبتول
+                        ( إدارة الموارد البشرية ) </p>
                 </div>
             </div>
 
@@ -40,12 +50,12 @@
             include "connect.php";
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $emp_brach = $_POST["emp_brach"];
+                $emp_gender = $_POST["emp_gender"];
                 $emp_name = $_POST["emp_name"];
                 $emp_nationality = $_POST["emp_nationality"];
                 $emp_id_number = $_POST["emp_id_number"];
                 $emp_id_expire_date_h = $_POST["emp_id_expire_date_h"];
                 $emp_id_expire_date_m = $_POST["emp_id_expire_date_m"];
-                $emp_place_issue_h = $_POST["emp_place_issue_h"];
                 $emp_place_issue_m = $_POST["emp_place_issue_m"];
                 $emp_date_birth_h = $_POST["emp_date_birth_h"];
                 $emp_date_birth_m = $_POST["emp_date_birth_m"];
@@ -77,6 +87,7 @@
                 $emp_street = $_POST["emp_street"];
                 $emp_email_address = $_POST["emp_email_address"];
                 $emp_mobile = $_POST["emp_mobile"];
+                $iban_number = $_POST["iban_number"];
                 $emp_bank = $_POST["emp_bank"];
                 $other_copy1_nameee = $_POST["other_copy1_name"];
                 $other_copy2_nameee = $_POST["other_copy2_name"];
@@ -181,35 +192,53 @@
                     $other_copy3_uploaded = '';
                 }
 
-                $stmt = $connect->prepare('INSERT INTO emp_form (emp_brach,emp_name,emp_nationality,emp_id_number,
-                emp_id_expire_date_h,  emp_id_expire_date_m, emp_place_issue_h,
+                $forerror = [];
+                if (strlen($emp_building_num > 4 || $emp_building_num < 4)) {
+                    $forerror[] = 'رقم المبني يجب ان يكون 4 ارقام';
+                }
+                if (strlen($emp_secondary_num > 4 || $emp_secondary_num < 4)) {
+                    $forerror[] = 'الرقم  الاضافي  يجب ان يكون 4 ارقام';
+                }
+                if (strlen($emp_postal_code > 5 || $emp_postal_code < 5)) {
+                    $forerror[] = ' الرمز   البريدي  يجب ان يكون 5 ارقام';
+                }
+
+                $stmt = $connect->prepare("SELECT * FROM emp_form WHERE emp_id_number=?");
+                $stmt->execute(array($emp_id_number));
+                $count = $stmt->rowCount();
+                if ($count > 0) {
+                    $forerror[] = ' رقم الهوية مسجل  بالفعل  ';
+                }
+
+                $stmt = $connect->prepare('INSERT INTO emp_form (emp_brach,emp_gender,emp_name,emp_nationality,emp_id_number,
+                emp_id_expire_date_h,  emp_id_expire_date_m,
                 emp_place_issue_m,  emp_date_birth_h,  emp_date_birth_m, emp_material_status,
                 emp_qualification, emp_grade,  emp_specialist,
                 emp_professional_licing,  emp_expire_date_pro_licing_h,  emp_expire_date_pro_licing_m,
                 emp_school,  emp_job,  emp_stage, emp_teaching_subject,  emp_date_start_y_h,
                 emp_date_start_y_m,  emp_building_num, emp_secondary_num,  emp_postal_code,  emp_town,
-                emp_city,  emp_flate_number,  emp_street,  emp_email_address, emp_mobile,
+                emp_city,  emp_flate_number,  emp_street,  emp_email_address, emp_mobile,iban_number,
                 emp_bank,  emp_id_copy,  emp_qualification_copy,  emp_national_address_copy,
                 emp_prof_licing_copy,  emp_bank_account_copy,
-                other_copy1_name,other_copy1,other_copy2_name,other_copy2,other_copy3_name, other_copy3) VALUES(:zemp_brach,:zemp_name,:zemp_nationality,:zemp_id_number,
-                :zemp_id_expire_date_h,  :zemp_id_expire_date_m, :zemp_place_issue_h,
+                other_copy1_name,other_copy1,other_copy2_name,other_copy2,other_copy3_name, other_copy3) VALUES(:zemp_brach,:zgender,:zemp_name,:zemp_nationality,:zemp_id_number,
+                :zemp_id_expire_date_h,  :zemp_id_expire_date_m,
                 :zemp_place_issue_m,  :zemp_date_birth_h,  :zemp_date_birth_m, :zemp_material_status,
                 :zemp_qualification, :zemp_grade,  :zemp_specialist,
                 :zemp_professional_licing,  :zemp_expire_date_pro_licing_h,  :zemp_expire_date_pro_licing_m,
                 :zemp_school,  :zemp_job,  :zemp_stage, :zemp_teaching_subject,  :zemp_date_start_y_h,
                 :zemp_date_start_y_m,  :zemp_building_num, :zemp_secondary_num,  :zemp_postal_code,  :zemp_town,
-                :zemp_city,  :zemp_flate_number,  :zemp_street,  :zemp_email_address, :zemp_mobile,
+                :zemp_city,  :zemp_flate_number,  :zemp_street,  :zemp_email_address, :zemp_mobile,:ziban_number,
                 :zemp_bank,  :zemp_id_copy,  :zemp_qualification_copy,  :zemp_national_address_copy,
                 :zemp_prof_licing_copy,  :zemp_bank_account_copy,
                 :zother_copy1_name,:zother_copy1,:zother_copy2_name,:zother_copy2,:zother_copy3_name ,:zother_copy3)');
                 $stmt->execute(array(
                     'zemp_brach' => $emp_brach,
+                    'zgender' => $emp_gender,
                     'zemp_name' => $emp_name,
                     'zemp_nationality' => $emp_nationality,
                     'zemp_id_number' => $emp_id_number,
                     'zemp_id_expire_date_h' => $emp_id_expire_date_h,
                     'zemp_id_expire_date_m' => $emp_id_expire_date_m,
-                    'zemp_place_issue_h' => $emp_place_issue_h,
                     'zemp_place_issue_m' => $emp_place_issue_m,
                     'zemp_date_birth_h' => $emp_date_birth_h,
                     'zemp_date_birth_m' => $emp_date_birth_m,
@@ -235,6 +264,7 @@
                     'zemp_street' => $emp_street,
                     'zemp_email_address' => $emp_email_address,
                     'zemp_mobile' => $emp_mobile,
+                    'ziban_number' => $iban_number,
                     'zemp_bank' => $emp_bank,
                     'zemp_id_copy' => $emp_id_copy_uploaded,
                     'zemp_qualification_copy' => $emp_qualification_copy_uploaded,
@@ -257,6 +287,20 @@
                     header('refresh:3;url=index.php');
 
                     ?>
+                <?php
+                } else {
+                ?>
+                    <div class="container">
+                        <?php
+                        foreach ($forerror as $error) {
+                        ?>
+                            <div class="alert alert-danger"> <?php echo $error; ?> </div>
+                        <?php
+                        }
+
+                        ?>
+
+                    </div>
             <?php
                 }
             }
@@ -284,6 +328,17 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label for="emp_gender" class="form-label"> النوع Gender <span class="star"> * </span> </label>
+                            <select name="emp_gender" id="emp_gender">
+                                <option value=""> -- اختر -- </option>
+                                <option value="ذكر"> ذكر Male </option>
+                                <option value="انثي"> انثي Female </option>
+
+                            </select>
+                        </div>
+
+
                         <h2>البيانــــات الشخصيــــــة (Personal Information )</h2>
 
                         <div class="fieldset-content">
@@ -294,7 +349,20 @@
 
                             <div class="form-group">
                                 <label for="emp_nationality" class="form-label"> الجنسية (Nationalit) <span class="star"> * </span> </label>
-                                <input required type="text" name="emp_nationality" id="emp_nationality" />
+                                <select class="select" required name="emp_nationality" id="emp_nationality">
+                                    <option value=""> اختر الدولة </option>
+                                    <?php
+                                    $stmt = $connect->prepare("SELECT * FROM countries");
+                                    $stmt->execute();
+                                    $allcount = $stmt->fetchAll();
+                                    foreach ($allcount as $country) { ?>
+                                        <option value="<?php echo $country['name']; ?>"> <?php echo $country['name']; ?> || <?php echo $country['name_ar']; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+
+
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="emp_id_number" class="form-label">رقم الهوية (ID Number) <span class="star"> * </span> </label>
@@ -306,7 +374,6 @@
 
                                 <div class="form-flex">
                                     <div class="form-group">
-                                        <label class="form-label">التاريخ بالميلادي</label>
                                         <div id="cal-1" class="select_date">
                                             <input required id="date-1" type="text" name="emp_id_expire_date_m" />
                                             <button class="icon-button showcall1" id="btn1" onclick="showCal1();">&#x25a6;</button>
@@ -314,7 +381,6 @@
                                         <!-- <input type="text" name="first_name" id="first_name" /> -->
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">التاريخ الهجري</label>
 
                                         <div id="cal-2" class="select_date">
                                             <input required id="date-2" type="text" name="emp_id_expire_date_h" />
@@ -324,28 +390,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <label for="" class="form-label">مكان الإصدار (Place Of Issue) <span class="star"> * </span> </label>
+                            <div class="form-group">
+                                <label for="emp_place_issue_m" class="form-label">مكان الإصدار (Place Of Issue) <span class="star"> * </span> </label>
+                                <select class="select" required name="emp_place_issue_m" id="emp_place_issue_m">
+                                    <option value=""> -- اختر المكان --</option>
+                                    <?php
+                                    $stmt = $connect->prepare("SELECT * FROM emp_place");
+                                    $stmt->execute();
+                                    $allcount = $stmt->fetchAll();
+                                    foreach ($allcount as $place) { ?>
+                                        <option value="<?php echo $place['name']; ?>"> <?php echo $place['name']; ?></option>
+                                    <?php
+                                    }
+                                    ?>
 
-                                <div class="form-flex">
-                                    <div class="form-group">
-                                        <label class="form-label">التاريخ بالميلادي</label>
-                                        <div id="cal-3" class="select_date">
-                                            <input id="date-3" type="text" name="emp_place_issue_m" />
-                                            <button class="icon-button showcall1" onclick="showCal3();">&#x25a6;</button>
-                                        </div>
-                                        <!-- <input type="text" name="first_name" id="first_name" /> -->
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label">التاريخ بالهجري</label>
 
-                                        <div id="cal-4" class="select_date">
-                                            <input id="date-4" type="text" name="emp_place_issue_h" />
-                                            <button class="icon-button showcall1" onclick="showCal4();">&#x25a6;</button>
-                                        </div>
-                                        <!-- <input type="text" name="first_name" id="first_name" /> -->
-                                    </div>
-                                </div>
+                                </select>
                             </div>
 
                             <div class="form-row">
@@ -353,7 +413,6 @@
 
                                 <div class="form-flex">
                                     <div class="form-group">
-                                        <label class="form-label">التاريخ بالميلادي</label>
                                         <div id="cal-5" class="select_date">
                                             <input id="date-5" type="text" name="emp_date_birth_m" />
                                             <button class="icon-button showcall1" onclick="showCal5();">&#x25a6;</button>
@@ -361,7 +420,6 @@
                                         <!-- <input type="text" name="first_name" id="first_name" /> -->
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">التاريخ بالهجري</label>
 
                                         <div id="cal-6" class="select_date">
                                             <input id="date-6" type="text" name="emp_date_birth_h" />
@@ -375,8 +433,10 @@
                                 <label for="emp_material_status" class="form-label"> الحالة الاجتماعية (Marital Status)<span class="star"> * </span> </label>
                                 <select required name="emp_material_status" id="emp_material_status">
                                     <option value=""> -- اختر الحالة الاجتماعية -- </option>
-                                    <option value="اعزب"> اعزب </option>
-                                    <option value="متزوج"> متزوج </option>
+                                    <option value="اعزب"> اعزب (single )</option>
+                                    <option value="متزوج"> متزوج (married ) </option>
+                                    <option value="منفصل"> منفصل (divorcee ) </option>
+                                    <option value="ارمل"> ارمل (Widower ) </option>
                                 </select>
                             </div>
                         </div>
@@ -420,7 +480,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="emp_specialist" class="form-label"> التخصص (Specialist) <span class="star"> * </span> </label>
+                                <label for="emp_specialist" class="form-label"> التخصص (Profession) <span class="star"> * </span> </label>
                                 <select required name="emp_specialist" id="emp_specialist">
                                     <option value=""> -- التخصص -- </option>
                                     <?php
@@ -464,7 +524,6 @@
                                 <label for="" class="form-label"> تاريخ انتهاء الرخصة (Expiration Date of Professional Licensing) <span class="star"> * </span> </label>
                                 <div class="form-flex">
                                     <div class="form-group">
-                                        <label class="form-label">التاريخ بالميلادي</label>
                                         <div id="cal-7" class="select_date">
                                             <input id="date-7" type="text" name="emp_expire_date_pro_licing_m" />
                                             <button class="icon-button showcall1" onclick="showCal7();">&#x25a6;</button>
@@ -472,7 +531,6 @@
                                         <!-- <input type="text" name="first_name" id="first_name" /> -->
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">التاريخ بالهجري</label>
 
                                         <div id="cal-8" class="select_date">
                                             <input id="date-8" type="text" name="emp_expire_date_pro_licing_h" />
@@ -559,7 +617,6 @@
 
                                 <div class="form-flex">
                                     <div class="form-group">
-                                        <label class="form-label">التاريخ بالميلادي</label>
                                         <div id="cal-9" class="select_date">
                                             <input id="date-9" type="text" name="emp_date_start_y_m" />
                                             <button class="icon-button showcall1" onclick="showCal9();">&#x25a6;</button>
@@ -567,7 +624,6 @@
                                         <!-- <input type="text" name="first_name" id="first_name" /> -->
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label">التاريخ الهجري</label>
 
                                         <div id="cal-10" class="select_date">
                                             <input id="date-10" type="text" name="emp_date_start_y_h" />
@@ -579,33 +635,48 @@
                             </div>
                         </div>
                     </fieldset>
-                    <h3>العنوان الوطني</h3>
+                    <h3> العنوان الوطني والبنك </h3>
                     <fieldset>
-                        <h2> العنوان الوطني National Address </h2>
+                        <h2> العنوان الوطني والبنك National Address </h2>
                         <div class="fieldset-content">
 
                             <div class="form-group">
                                 <label for="emp_building_num" class="form-label"> رقم المبنى الاساسي (Building No) <span class="star"> * </span> </label>
-                                <input required type="text" name="emp_building_num" id="emp_building_num" />
+                                <input minlength="4" maxlength="4" required type="text" name="emp_building_num" id="emp_building_num" />
                             </div>
                             <div class="form-group">
                                 <label for="emp_secondary_num" class="form-label"> الرقم الإضافي (Secondary No.) <span class="star"> * </span> </label>
-                                <input required type="text" name="emp_secondary_num" id="emp_secondary_num" />
+                                <input minlength="4" maxlength="4" required type="text" name="emp_secondary_num" id="emp_secondary_num" />
                             </div>
                             <div class="form-group">
                                 <label for="emp_postal_code" class="form-label">الرمز البريدي (Postal Code) <span class="star"> * </span> </label>
-                                <input required type="text" name="emp_postal_code" id="emp_postal_code" />
+                                <input minlength="5" maxlength="5" required type="text" name="emp_postal_code" id="emp_postal_code" />
                             </div>
                             <div class="form-group">
-                                <label for="emp_town" class="form-label"> المدينة (Town) <span class="star"> * </span> </label>
-                                <input required type="text" name="emp_town" id="emp_town" />
+                                <label for="emp_town" class="form-label"> المدينة (City) <span class="star"> * </span> </label>
+
+                                <select class="select" required name="emp_town" id="emp_town">
+                                    <option value=""> -- اختر --</option>
+                                    <?php
+                                    $stmt = $connect->prepare("SELECT * FROM emp_city");
+                                    $stmt->execute();
+                                    $allcount = $stmt->fetchAll();
+                                    foreach ($allcount as $place) { ?>
+                                        <option value="<?php echo $place['name']; ?>"> <?php echo $place['name']; ?></option>
+                                    <?php
+                                    }
+                                    ?>
+
+
+                                </select>
+
                             </div>
                             <div class="form-group">
-                                <label for="emp_city" class="form-label"> الحي (City) <span class="star"> * </span> </label>
+                                <label for="emp_city" class="form-label"> الحي (Area) <span class="star"> * </span> </label>
                                 <input required type="text" name="emp_city" id="emp_city" />
                             </div>
                             <div class="form-group">
-                                <label for="emp_flate_number" class="form-label"> رقم الوحدة (Flate Number) <span class="star"> * </span> </label>
+                                <label for="emp_flate_number" class="form-label"> رقم الوحدة او الشقة (Flat Number) <span class="star"> * </span> </label>
                                 <input type="text" name="emp_flate_number" id="emp_flate_number" />
                             </div>
                             <div class="form-group">
@@ -618,7 +689,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="emp_mobile" class="form-label"> الجوال المسجل بنظام أبشر (Abshir Mobile No.) <span class="star"> * </span> </label>
-                                <input required type="number" name="emp_mobile" id="emp_mobile" />
+                                <input minlength="10" maxlength="10" required type="number" name="emp_mobile" id="emp_mobile" />
+                            </div>
+                            <div class="form-group iban">
+                                <label for="iban_number" class="form-label"> رقم الآيبان (IBAN Number.) <span class="star"> * </span> </label>
+                                <input required type="text" name="iban_number" id="iban_number" />
+                                <span class="iban_span"> SA </span>
                             </div>
                             <div class="form-group">
                                 <label for="emp_bank" class="form-label"> البنك ( Bank) <span class="star"> * </span> </label>
@@ -647,27 +723,26 @@
                         <div class="fieldset-content">
                             <div class="form-group">
                                 <label for="emp_id_copy" class="form-label"> صورة الهوية (ID Copy) <span class="star"> * </span> </label>
-                                <input required type="file" name="emp_id_copy" id="emp_id_copy" />
+                                <input required type="file" name="emp_id_copy" id="emp_id_copy" accept="application/pdf,image/*" />
                             </div>
                             <div class="form-group">
                                 <label for="emp_qualification_copy" class="form-label"> صورة المؤهل (Qualification Copy) <span class="star"> * </span> </label>
-                                <input required type="file" name="emp_qualification_copy" id="emp_qualification_copy" />
+                                <input required type="file" name="emp_qualification_copy" id="emp_qualification_copy" accept="application/pdf,image/*" />
                             </div>
                             <div class="form-group">
                                 <label for="emp_national_address_copy" class="form-label">صورة العنوان الوطني(National Address Copy ) <span class="star"> * </span> </label>
-                                <input required type="file" name="emp_national_address_copy" id="emp_national_address_copy" />
+                                <input required type="file" name="emp_national_address_copy" id="emp_national_address_copy" accept="application/pdf,image/*" />
                             </div>
                             <div class="form-group" id="checked_input2">
-                                <label for="emp_prof_licing_copy" class="form-label"> صورة الرخصة المهنية (Copy of Professional Licensing ) <span class="star"> * </span> </label>
-                                <input type="file" name="emp_prof_licing_copy" id="emp_prof_licing_copy" />
+                                <label for="emp_prof_licing_copy" class="form-label"> صورة الرخصة المهنية ( Professional Licensing Copy ) <span class="star"> * </span> </label>
+                                <input type="file" name="emp_prof_licing_copy" id="emp_prof_licing_copy" accept="application/pdf,image/*" />
                             </div>
                             <div class="form-group">
                                 <label for="emp_bank_account_copy" class="form-label">صورة الحساب البنكي (Bank Account Information) <span class="star"> * </span> </label>
-                                <input required type="file" name="emp_bank_account_copy" id="emp_bank_account_copy" />
+                                <input required type="file" name="emp_bank_account_copy" id="emp_bank_account_copy" accept="application/pdf,image/*" />
                             </div>
                             <div class="form-flex">
                                 <div class="form-group">
-                                    <label class="form-label">التاريخ بالميلادي</label>
                                     <div id="cal-11" class="select_date">
                                         <input id="date-11" type="text" name="emp_date_start_y_m" />
                                         <button class="icon-button showcall1" onclick="showCal11();">&#x25a6;</button>
@@ -675,8 +750,6 @@
                                     <!-- <input type="text" name="first_name" id="first_name" /> -->
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">التاريخ الهجري</label>
-
                                     <div id="cal-12" class="select_date">
                                         <input id="date-12" type="text" name="emp_date_start_y_h" />
                                         <button class="icon-button showcall1" onclick="showCal12();">&#x25a6;</button>
@@ -697,7 +770,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="other_copy1" class="form-label"> المرفق </label>
-                                        <input type="file" name="other_copy1" id="other_copy1" />
+                                        <input type="file" name="other_copy1" id="other_copy1" accept="application/pdf,image/*" />
                                     </div>
                                 </div>
                             </div>
@@ -714,7 +787,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="other_copy2" class="form-label"> المرفق </label>
-                                        <input type="file" name="other_copy2" id="other_copy2" />
+                                        <input type="file" name="other_copy2" id="other_copy2" accept="application/pdf,image/*" />
                                     </div>
                                 </div>
                             </div>
@@ -731,14 +804,14 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="other_copy3" class="form-label"> المرفق </label>
-                                        <input type="file" name="other_copy3" id="other_copy3" />
+                                        <input type="file" name="other_copy3" id="other_copy3" accept="application/pdf,image/*" />
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group text-center" style="display: block;">
                                 <button class="btn btn-primary" type="submit"> ارسال <i class="fa fa-plane"></i> </button>
                                 <button type="reset" class="btn btn-warning"> <a href="index.php" style="color: #fff;"> مسح </a> </button>
-                               <!-- <button class="printbtn">Print</button> -->
+                                <!-- <button class="printbtn">Print</button> -->
                             </div>
                         </div>
 
@@ -757,6 +830,7 @@
     <script src="vendor/minimalist-picker/dobpicker.js"></script>
     <script src="vendor/nouislider/nouislider.min.js"></script>
     <script src="vendor/wnumb/wNumb.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="js/jquery.PrintArea.js"></script>
     <script src="js/calendar.js"></script>
     <script src="js/hijri-date.js"></script>
@@ -767,6 +841,7 @@
 <!-- START GET DATE -->
 
 <script>
+    $(".select").select2();
     let checkbox = document.getElementById("tax_client_prev1");
     let checkbox2 = document.getElementById("tax_client_prev2");
     checkbox.addEventListener("change", () => {
@@ -808,18 +883,11 @@
         date2 = document.getElementById('date-2'),
         cal1Mode = cal1.isHijriMode(),
         cal2Mode = cal2.isHijriMode(),
-        // date2
-        cal3 = new Calendar(),
-        cal4 = new Calendar(true, 0, false, true),
 
-        date3 = document.getElementById('date-3'),
-        date4 = document.getElementById('date-4'),
-        cal3Mode = cal3.isHijriMode(),
-        cal4Mode = cal4.isHijriMode();
 
-    // date3
+        // date3
 
-    cal5 = new Calendar(),
+        cal5 = new Calendar(),
         cal6 = new Calendar(true, 0, false, true),
 
         date5 = document.getElementById('date-5'),
@@ -860,10 +928,7 @@
     document.getElementById('cal-2').appendChild(cal2.getElement());
     cal1.hide();
     cal2.hide();
-    document.getElementById('cal-3').appendChild(cal3.getElement());
-    document.getElementById('cal-4').appendChild(cal4.getElement());
-    cal3.hide();
-    cal4.hide();
+
     document.getElementById('cal-5').appendChild(cal5.getElement());
     document.getElementById('cal-6').appendChild(cal6.getElement());
     cal5.hide();
@@ -893,17 +958,7 @@
             cal2.setTime(cal1.getTime());
         setDateFields();
     };
-    cal3.callback = function() {
-        if (cal3Mode !== cal3.isHijriMode()) {
-            cal3.disableCallback(true);
-            cal3.changeDateMode();
-            cal3.disableCallback(false);
-            cal3Mode = cal3.isHijriMode();
-            cal4Mode = cal4.isHijriMode();
-        } else
-            cal4.setTime(cal3.getTime());
-        setDateFields();
-    };
+
 
     cal5.callback = function() {
         if (cal5Mode !== cal5.isHijriMode()) {
@@ -962,17 +1017,7 @@
         setDateFields();
     };
 
-    cal4.callback = function() {
-        if (cal4Mode !== cal4.isHijriMode()) {
-            cal3.disableCallback(true);
-            cal3.changeDateMode();
-            cal3.disableCallback(false);
-            cal3Mode = cal3.isHijriMode();
-            cal4Mode = cal4.isHijriMode();
-        } else
-            cal3.setTime(cal4.getTime());
-        setDateFields();
-    };
+
 
     cal6.callback = function() {
         if (cal6Mode !== cal6.isHijriMode()) {
@@ -1028,8 +1073,6 @@
     function setDateFields() {
         date1.value = cal1.getDate().getDateString();
         date2.value = cal2.getDate().getDateString();
-        date3.value = cal3.getDate().getDateString();
-        date4.value = cal4.getDate().getDateString();
         date5.value = cal5.getDate().getDateString();
         date6.value = cal6.getDate().getDateString();
         date7.value = cal7.getDate().getDateString();
@@ -1045,20 +1088,13 @@
         else cal1.hide();
     }
 
-    function showCal3() {
-        if (cal3.isHidden()) cal3.show();
-        else cal3.hide();
-    }
+
 
     function showCal2() {
         if (cal2.isHidden()) cal2.show();
         else cal2.hide();
     }
 
-    function showCal4() {
-        if (cal4.isHidden()) cal4.show();
-        else cal4.hide();
-    }
 
     function showCal5() {
         if (cal5.isHidden()) cal5.show();

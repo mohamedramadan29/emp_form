@@ -26,7 +26,7 @@
             next: 'التالي',
             finish: '<li class="last_finish"> ارسال </li>',
             current: ''
-        },
+        },/*
         onStepChanging: function (event, currentIndex, newIndex) {
             if (currentIndex === 0) {
                 form.parent().parent().parent().append('<div class="footer footer-' + currentIndex + '"></div>');
@@ -56,7 +56,7 @@
         onStepChanged: function (event, currentIndex, priorIndex) {
 
             return true;
-        }
+        }*/
     });
 
     jQuery.extend(jQuery.validator.messages, {

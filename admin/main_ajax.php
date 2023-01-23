@@ -101,4 +101,21 @@ if ($dir == 'jobs_insurance' && $page == 'add') {
     include 'jobs_insurance/edit.php';
 }
 // END Job Insurance
+//  Start Job Insurance
+
+if ($dir == 'emp_place' && $page == 'add') {
+    include 'emp_place/add.php';
+} elseif ($dir == 'emp_place' && $page == 'edit') {
+    include 'emp_place/edit.php';
+}
+// END Job Insurance
+
+//  Start Emp City
+
+if ($dir == 'emp_city' && $page == 'add') {
+    include 'emp_city/add.php';
+} elseif ($dir == 'emp_city' && $page == 'edit') {
+    include 'emp_city/edit.php';
+}
+// END Emp City
 ?>

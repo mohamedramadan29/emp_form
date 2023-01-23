@@ -42,62 +42,50 @@
                       <a href="#" class="nav-link nav-link2">
                           <i class="fa-solid fa-project-diagram color8"></i>
                           <p>
-                              الموهلات
+                              البيانات الشخصية
                               <i class="right fas fa-angle-left "></i>
                           </p>
                       </a>
                       <ul class="nav nav-treeview">
+
+                          <li class="nav-item" id="lnk-add-project">
+                              <a href="main.php?dir=emp_branche&page=report" class="nav-link">
+                                  <i class="fa fa-eye color2"></i>
+                                  <p> تصنيف الموظف </p>
+                              </a>
+                          </li>
+                          <li class="nav-item" id="lnk-add-project">
+                              <a href="main.php?dir=emp_place&page=report" class="nav-link">
+                                  <i class="fa fa-eye color2"></i>
+                                  <p>  مكان الإصدار </p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+
+
+                  <li class="nav-item" id="lnk-project">
+                      <a href="#" class="nav-link nav-link2">
+                          <i class="fa-solid fa-project-diagram color8"></i>
+                          <p>
+                              البيانات الاكاديمية
+                              <i class="right fas fa-angle-left "></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+
                           <li class="nav-item" id="lnk-add-project">
                               <a href="main.php?dir=qualifications&page=report" class="nav-link">
                                   <i class="fa fa-eye color2"></i>
                                   <p> مشاهدة جميع الموهلات </p>
                               </a>
                           </li>
-                      </ul>
-                  </li>
-                  <li class="nav-item" id="lnk-project">
-                      <a href="#" class="nav-link nav-link2">
-                          <i class="fa-solid fa-project-diagram color8"></i>
-                          <p>
-                              تصنيف الموظفين
-                              <i class="right fas fa-angle-left "></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                          <li class="nav-item" id="lnk-add-project">
-                              <a href="main.php?dir=emp_branche&page=report" class="nav-link">
-                                  <i class="fa fa-eye color2"></i>
-                                  <p> مشاهدة جميع التصنيفات </p>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li class="nav-item" id="lnk-project">
-                      <a href="#" class="nav-link nav-link2">
-                          <i class="fa-solid fa-project-diagram color8"></i>
-                          <p>
-                              التقديرات
-                              <i class="right fas fa-angle-left "></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
                           <li class="nav-item" id="lnk-add-project">
                               <a href="main.php?dir=grads&page=report" class="nav-link">
                                   <i class="fa fa-eye color2"></i>
                                   <p> مشاهدة جميع التقديرات </p>
                               </a>
                           </li>
-                      </ul>
-                  </li>
-                  <li class="nav-item" id="lnk-project">
-                      <a href="#" class="nav-link nav-link2">
-                          <i class="fa-solid fa-project-diagram color8"></i>
-                          <p>
-                              التخصصات
-                              <i class="right fas fa-angle-left "></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
                           <li class="nav-item" id="lnk-add-project">
                               <a href="main.php?dir=specialist&page=report" class="nav-link">
                                   <i class="fa fa-eye color2"></i>
@@ -106,59 +94,69 @@
                           </li>
                       </ul>
                   </li>
-                  <!--
+
                   <li class="nav-item" id="lnk-project">
                       <a href="#" class="nav-link nav-link2">
                           <i class="fa-solid fa-project-diagram color8"></i>
                           <p>
-                              الرخص المهنية
+                              البيانات الوظيفية
                               <i class="right fas fa-angle-left "></i>
                           </p>
                       </a>
                       <ul class="nav nav-treeview">
-                          <li class="nav-item" id="lnk-add-project">
-                              <a href="main.php?dir=professional_licing&page=report" class="nav-link">
-                                  <i class="fa fa-eye color2"></i>
-                                  <p> مشاهدة جميع الرخص </p>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
--->
-                  <li class="nav-item" id="lnk-project">
-                      <a href="#" class="nav-link nav-link2">
-                          <i class="fa-solid fa-project-diagram color8"></i>
-                          <p>
-                              المدارس
-                              <i class="right fas fa-angle-left "></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
+
                           <li class="nav-item" id="lnk-add-project">
                               <a href="main.php?dir=schools&page=report" class="nav-link">
                                   <i class="fa fa-eye color2"></i>
                                   <p> مشاهدة جميع المدارس </p>
                               </a>
                           </li>
-                      </ul>
-                  </li>
-                  <li class="nav-item" id="lnk-project">
-                      <a href="#" class="nav-link nav-link2">
-                          <i class="fa-solid fa-project-diagram color8"></i>
-                          <p>
-                              الوظائف
-                              <i class="right fas fa-angle-left "></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
                           <li class="nav-item" id="lnk-add-project">
                               <a href="main.php?dir=jobs&page=report" class="nav-link">
                                   <i class="fa fa-eye color2"></i>
                                   <p> مشاهدة جميع الوظائف </p>
                               </a>
                           </li>
+                          <li class="nav-item" id="lnk-add-project">
+                              <a href="main.php?dir=stage&page=report" class="nav-link">
+                                  <i class="fa fa-eye color2"></i>
+                                  <p> مشاهدة جميع المراحل </p>
+                              </a>
+                          </li>
+                          <li class="nav-item" id="lnk-add-project">
+                              <a href="main.php?dir=teaching_subject&page=report" class="nav-link">
+                                  <i class="fa fa-eye color2"></i>
+                                  <p> مشاهدة جميع المواد </p>
+                              </a>
+                          </li>
+
                       </ul>
                   </li>
+
+                  <li class="nav-item" id="lnk-project">
+                      <a href="#" class="nav-link nav-link2">
+                          <i class="fa-solid fa-project-diagram color8"></i>
+                          <p>
+                              العنوان الوطني والبنك
+                              <i class="right fas fa-angle-left "></i>
+                          </p>
+                      </a>
+                      <ul class="nav nav-treeview">
+                          <li class="nav-item" id="lnk-add-project">
+                              <a href="main.php?dir=bank&page=report" class="nav-link">
+                                  <i class="fa fa-eye color2"></i>
+                                  <p> مشاهدة جميع البنوك </p>
+                              </a>
+                          </li>
+                          <li class="nav-item" id="lnk-add-project">
+                              <a href="main.php?dir=emp_city&page=report" class="nav-link">
+                                  <i class="fa fa-eye color2"></i>
+                                  <p> مشاهدة جميع المدن </p>
+                              </a>
+                          </li>
+                      </ul>
+                  </li>
+
                   <li class="nav-item" id="lnk-project">
                       <a href="#" class="nav-link nav-link2">
                           <i class="fa-solid fa-project-diagram color8"></i>
@@ -174,59 +172,30 @@
                                   <p> مشاهدة جميع الوظائف </p>
                               </a>
                           </li>
+
                       </ul>
                   </li>
+
                   <li class="nav-item" id="lnk-project">
                       <a href="#" class="nav-link nav-link2">
                           <i class="fa-solid fa-project-diagram color8"></i>
                           <p>
-                              المراحل
+                              اعدادات الموقع
                               <i class="right fas fa-angle-left "></i>
                           </p>
                       </a>
                       <ul class="nav nav-treeview">
+
                           <li class="nav-item" id="lnk-add-project">
-                              <a href="main.php?dir=stage&page=report" class="nav-link">
+                              <a href="main.php?dir=settings&page=report" class="nav-link">
                                   <i class="fa fa-eye color2"></i>
-                                  <p> مشاهدة جميع المراحل </p>
+                                  <p> تحديد العام الدراسي </p>
                               </a>
                           </li>
                       </ul>
                   </li>
-                  <li class="nav-item" id="lnk-project">
-                      <a href="#" class="nav-link nav-link2">
-                          <i class="fa-solid fa-project-diagram color8"></i>
-                          <p>
-                              مواد التدريس
-                              <i class="right fas fa-angle-left "></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                          <li class="nav-item" id="lnk-add-project">
-                              <a href="main.php?dir=teaching_subject&page=report" class="nav-link">
-                                  <i class="fa fa-eye color2"></i>
-                                  <p> مشاهدة جميع المواد </p>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
-                  <li class="nav-item" id="lnk-project">
-                      <a href="#" class="nav-link nav-link2">
-                          <i class="fa-solid fa-project-diagram color8"></i>
-                          <p>
-                              البنوك
-                              <i class="right fas fa-angle-left "></i>
-                          </p>
-                      </a>
-                      <ul class="nav nav-treeview">
-                          <li class="nav-item" id="lnk-add-project">
-                              <a href="main.php?dir=bank&page=report" class="nav-link">
-                                  <i class="fa fa-eye color2"></i>
-                                  <p> مشاهدة جميع البنوك </p>
-                              </a>
-                          </li>
-                      </ul>
-                  </li>
+
+
               </ul>
           </nav>
           <!-- /.sidebar-menu -->

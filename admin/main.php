@@ -173,6 +173,49 @@ include $tem . 'left_sidebar.php';
             include 'emp_register/public_emp.php';
         }
         // END emp_register
+        //  Start emp_place
+
+        if ($dir == 'emp_place' && $page == 'add') {
+            include 'emp_place/add.php';
+        } elseif ($dir == 'emp_place' && $page == 'edit') {
+            include 'emp_place/edit.php';
+        } elseif ($dir == 'emp_place' && $page == 'report') {
+            include 'emp_place/report.php';
+        } elseif ($dir == 'emp_place' && $page == 'view') {
+            include 'emp_place/view.php';
+        } elseif ($dir == 'emp_place' && $page == 'delete') {
+            include 'emp_place/delete.php';
+        }
+        // END emp_place
+
+           //  Start emp_city
+
+           if ($dir == 'emp_city' && $page == 'add') {
+            include 'emp_city/add.php';
+        } elseif ($dir == 'emp_city' && $page == 'edit') {
+            include 'emp_city/edit.php';
+        } elseif ($dir == 'emp_city' && $page == 'report') {
+            include 'emp_city/report.php';
+        } elseif ($dir == 'emp_city' && $page == 'view') {
+            include 'emp_city/view.php';
+        } elseif ($dir == 'emp_city' && $page == 'delete') {
+            include 'emp_city/delete.php';
+        }
+        // END emp_city
+
+        //  Start Settings 
+
+        if ($dir == 'settings' && $page == 'add') {
+            include 'settings/add.php';
+        } elseif ($dir == 'settings' && $page == 'edit') {
+            include 'settings/edit.php';
+        } elseif ($dir == 'settings' && $page == 'report') {
+            include 'settings/report.php';
+        } elseif ($dir == 'settings' && $page == 'delete') {
+            include 'settings/delete.php';
+        }
+        // END Settings
+
 
         // START REPORTS
         elseif ($dir = 'dashboard' && $page == 'dashboard') {
