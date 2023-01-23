@@ -57,7 +57,7 @@
                           <li class="nav-item" id="lnk-add-project">
                               <a href="main.php?dir=emp_place&page=report" class="nav-link">
                                   <i class="fa fa-eye color2"></i>
-                                  <p>  مكان الإصدار </p>
+                                  <p> مكان الإصدار </p>
                               </a>
                           </li>
                       </ul>
@@ -161,7 +161,7 @@
                       <a href="#" class="nav-link nav-link2">
                           <i class="fa-solid fa-project-diagram color8"></i>
                           <p>
-                              وظائف التأمينات
+                              الادراة العامة
                               <i class="right fas fa-angle-left "></i>
                           </p>
                       </a>
@@ -169,7 +169,19 @@
                           <li class="nav-item" id="lnk-add-project">
                               <a href="main.php?dir=job_insurance&page=report" class="nav-link">
                                   <i class="fa fa-eye color2"></i>
-                                  <p> مشاهدة جميع الوظائف </p>
+                                  <p> مشاهدة وظائف التأمينات </p>
+                              </a>
+                          </li>
+                          <li class="nav-item" id="lnk-add-project">
+                              <a href="main.php?dir=daam_elig&page=report" class="nav-link">
+                                  <i class="fa fa-eye color2"></i>
+                                  <p> اهلية الدعم  </p>
+                              </a>
+                          </li>
+                          <li class="nav-item" id="lnk-add-project">
+                              <a href="main.php?dir=daam_support&page=report" class="nav-link">
+                                  <i class="fa fa-eye color2"></i>
+                                  <p> نوع الدعم  </p>
                               </a>
                           </li>
 

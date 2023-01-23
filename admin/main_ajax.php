@@ -118,4 +118,21 @@ if ($dir == 'emp_city' && $page == 'add') {
     include 'emp_city/edit.php';
 }
 // END Emp City
+//  Start daam_elig
+
+if ($dir == 'daam_elig' && $page == 'add') {
+    include 'daam_elig/add.php';
+} elseif ($dir == 'daam_elig' && $page == 'edit') {
+    include 'daam_elig/edit.php';
+}
+// END daam_elig
+
+//  Start daam_support
+
+if ($dir == 'daam_support' && $page == 'add') {
+    include 'daam_support/add.php';
+} elseif ($dir == 'daam_support' && $page == 'edit') {
+    include 'daam_support/edit.php';
+}
+// ENDdaam_support
 ?>

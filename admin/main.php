@@ -188,9 +188,9 @@ include $tem . 'left_sidebar.php';
         }
         // END emp_place
 
-           //  Start emp_city
+        //  Start emp_city
 
-           if ($dir == 'emp_city' && $page == 'add') {
+        if ($dir == 'emp_city' && $page == 'add') {
             include 'emp_city/add.php';
         } elseif ($dir == 'emp_city' && $page == 'edit') {
             include 'emp_city/edit.php';
@@ -216,6 +216,31 @@ include $tem . 'left_sidebar.php';
         }
         // END Settings
 
+        //  Start daam_elig 
+
+        if ($dir == 'daam_elig' && $page == 'add') {
+            include 'daam_elig/add.php';
+        } elseif ($dir == 'daam_elig' && $page == 'edit') {
+            include 'daam_elig/edit.php';
+        } elseif ($dir == 'daam_elig' && $page == 'report') {
+            include 'daam_elig/report.php';
+        } elseif ($dir == 'daam_elig' && $page == 'delete') {
+            include 'daam_elig/delete.php';
+        }
+        // END daam_elig
+
+        //  Start daam_support 
+
+        if ($dir == 'daam_support' && $page == 'add') {
+            include 'daam_support/add.php';
+        } elseif ($dir == 'daam_support' && $page == 'edit') {
+            include 'daam_support/edit.php';
+        } elseif ($dir == 'daam_support' && $page == 'report') {
+            include 'daam_support/report.php';
+        } elseif ($dir == 'daam_support' && $page == 'delete') {
+            include 'daam_support/delete.php';
+        }
+        // END daam_support
 
         // START REPORTS
         elseif ($dir = 'dashboard' && $page == 'dashboard') {
