@@ -87,6 +87,9 @@
                                 <a class="btn btn-info btn-sm" href="main.php?dir=emp_register&page=public_emp&emp_id=<?php echo $type['emp_id']; ?> ">
                                     الادارة العامة <i class="fa fa-plus"></i>
                                 </a>
+                                <a class="btn btn-primary btn-sm" href="main.php?dir=emp_register&page=edit&emp_id=<?php echo $type['emp_id']; ?> ">
+                                    تعديل <i class="fa fa-pen"></i>
+                                </a>
                                 <a class="btn btn-warning btn-sm" href="main.php?dir=emp_register&page=view&emp_id=<?php echo $type['emp_id']; ?> ">
                                     مشاهدة <i class="fa fa-eye"></i>
                                 </a>

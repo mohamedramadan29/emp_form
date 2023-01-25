@@ -956,20 +956,7 @@ label.error{
   text-align: right;
   background: #fff;
 }
-.main .signup-form h2{
-  font-size: 25px;
-  margin-bottom: 20px;
-  direction: rtl;
-  background: #e74c3c;
-  padding: 10px;
-  color: #fff;
-  max-width: 600px;
-  margin: auto;
-  border-radius: 5px;
-  margin-top: 30px;
-  text-align: center;
-  margin-bottom: 30px;
-}
+ 
 .content, .actions {
   background: #f8f8f8;
   padding: 30px;

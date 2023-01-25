@@ -180,17 +180,17 @@ $(document).ready(function () {
     if (window.location.href.indexOf("add") != -1) {
       $("#lnk-add-packeges").addClass("active-tab");
     }
-    
+
   }
   // end Packeges
-    // START Subscribe
-    if (window.location.href.indexOf("dir=subscribe") != -1) {
-      $("#lnk-subscribe").addClass("active menu-is-opening menu-open");
-      if (window.location.href.indexOf("add") != -1) {
-        $("#lnk-add-subscribe").addClass("active-tab");
-      }
+  // START Subscribe
+  if (window.location.href.indexOf("dir=subscribe") != -1) {
+    $("#lnk-subscribe").addClass("active menu-is-opening menu-open");
+    if (window.location.href.indexOf("add") != -1) {
+      $("#lnk-add-subscribe").addClass("active-tab");
     }
-    // End Subscribe
+  }
+  // End Subscribe
   // END NEW WEBSITE EDUCATION
 
   $(".country").select2({
@@ -207,8 +207,8 @@ $(document).ready(function () {
   });
 
   $("#tableone").DataTable({
-    "order": [[ 0, "desc" ]],
-  
+    "order": [[0, "desc"]],
+
 
     language: {
       search: "ابحث:",
@@ -344,18 +344,23 @@ $(document).ready(function () {
         extend: 'excel',
         className: 'btn btn-secondary btn-sm',
         text: ' <i class="fa fa-file-export"></i> تصدير لملف اكسل',
+        exportOptions: {
+          columns: ':visible'
+        }
       },
       {
         extend: 'print',
         className: 'btn btn-primary btn-sm',
         text: '<i class="fa fa-print"></i>  طباعه   ',
+        exportOptions: {
+          columns: ':visible'
+        }
       },
-      
-      /*{
+      {
         extend: 'colvis',
         className: 'btn btn-danger btn-sm',
         text: '<i class="fa fa-eye"></i>  اختر الاعمدة   ',
-      }*/
+      } 
     ],
   });
 });

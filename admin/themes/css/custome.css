@@ -2305,23 +2305,26 @@ label small {
   font-weight: bold;
   color: #fff;
 }
-.dashboard_data .info .alert_notification{
-  display:flex;
+
+.dashboard_data .info .alert_notification {
+  display: flex;
   justify-content: space-between;
 }
-.dashboard_data .info .alert_notification p{
+
+.dashboard_data .info .alert_notification p {
   border: 1px solid #ccc;
-    /* padding: 4px; */
-    border-radius: 100px;
-    color: red;
-    font-weight: bold;
-    width: 35px;
-    height: 35px;
-    text-align: center;
-    align-items: center;
-    line-height: 35px;
-    background: blanchedalmond;
+  /* padding: 4px; */
+  border-radius: 100px;
+  color: red;
+  font-weight: bold;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  align-items: center;
+  line-height: 35px;
+  background: blanchedalmond;
 }
+
 /* END NEW DASHBOARD DESIGN */
 
 
@@ -2357,11 +2360,13 @@ label small {
   border-radius: 6px;
   width: 400px;
 }
+
 .chat_section .data .sender_message .message_info a,
-.chat_section .data .recever_message .message_info a{
-  color:#3498db;
+.chat_section .data .recever_message .message_info a {
+  color: #3498db;
   text-decoration: underline;
 }
+
 .chat_section .data .sender_message img,
 .chat_section .data .recever_message img {
   width: 60px;
@@ -2445,23 +2450,26 @@ label small {
   text-align: right;
   margin-top: 20px;
 }
-.dashboard_data .info .alert_notification{
-  display:flex;
+
+.dashboard_data .info .alert_notification {
+  display: flex;
   justify-content: space-between;
 }
-.dashboard_data .info .alert_notification p{
+
+.dashboard_data .info .alert_notification p {
   border: 1px solid #ccc;
-    /* padding: 4px; */
-    border-radius: 100px;
-    color: red;
-    font-weight: bold;
-    width: 35px;
-    height: 35px;
-    text-align: center;
-    align-items: center;
-    line-height: 35px;
-    background: blanchedalmond;
-} 
+  /* padding: 4px; */
+  border-radius: 100px;
+  color: red;
+  font-weight: bold;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  align-items: center;
+  line-height: 35px;
+  background: blanchedalmond;
+}
+
 .dashboard_data .info1 {
   background-color: #1abc9c;
 }
@@ -2529,7 +2537,7 @@ label small {
   border-bottom: 1px solid #f1f1f1;
   padding: 10px;
   display: flex;
-  justify-content: flex-start; 
+  justify-content: flex-start;
 
 }
 
@@ -2570,12 +2578,96 @@ label small {
 .all_message .data .message_data .info span i {
   font-size: 16px;
 }
- 
+
 /* END ALL MESSAGE PAGE */
-.daam_status span{
+.daam_status span {
   width: 100px;
   height: 40px;
   background-color: red;
   display: block;
   border-radius: 5px;
+}
+
+
+.iban {
+  position: relative;
+}
+
+.iban .iban_span {
+  position: absolute;
+  top: 37px;
+  right: 1px;
+  display: block;
+  background: #bfbfbf;
+  padding: 11px;
+}
+
+.iban input {
+  padding-right: 50px;
+}
+
+.printbtn {
+  margin-top: 20px;
+}
+
+.main .signup-form h2 {
+  font-size: 23px;
+  margin-bottom: 20px;
+  direction: rtl;
+  padding: 3px;
+  color: #565252;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 5px;
+  text-align: center;
+  margin-bottom: 10px;
+  border: 1px dashed;
+}
+
+.main {
+  padding: 0 !important;
+}
+
+.form-label { 
+  margin-bottom: 2px !important;
+}
+input{
+  height:40px !important;
+}
+.dt-button-collection {
+
+}
+.dt-button-collection button{
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+  }
+
+  .select2-container {
+    text-align: right !important;
+  }
+
+  .print_content h2 {
+
+    font-size: 23px;
+    margin-bottom: 20px;
+    direction: rtl;
+    padding: 10px;
+    color: #565252;
+    max-width: 600px;
+    margin: auto;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 10px;
+    border: 1px dashed;
+
+  }
 }
