@@ -345,7 +345,8 @@ $(document).ready(function () {
         className: 'btn btn-secondary btn-sm',
         text: ' <i class="fa fa-file-export"></i> تصدير لملف اكسل',
         exportOptions: {
-          columns: ':visible'
+          //columns: ':visible'
+          columns: [1,2,3,4]
         }
       },
       {
@@ -353,14 +354,15 @@ $(document).ready(function () {
         className: 'btn btn-primary btn-sm',
         text: '<i class="fa fa-print"></i>  طباعه   ',
         exportOptions: {
-          columns: ':visible'
+         // columns: ':visible'
+          columns: [1,2,3,4]
         }
-      },
+      }/*,
       {
         extend: 'colvis',
         className: 'btn btn-danger btn-sm',
         text: '<i class="fa fa-eye"></i>  اختر الاعمدة   ',
-      } 
+      } */
     ],
   });
 });

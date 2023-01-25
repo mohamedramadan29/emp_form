@@ -80,358 +80,353 @@
             <?php
                 }
             }
-
-
             ?>
             <form method="POST" id="signup-form" class="signup-form form-group" action="" enctype="multipart/form-data">
-
                 <div>
-
-                    <div class="fieldset-content">
-                        <div class="form-group">
-                            <label class="form-label"> الاسم بالكامل ( Full Name ) <span class="star"> * </span></label>
-                            <input type="text" name="emp_name" id="name" value="<?php echo $emp_data['emp_name']; ?>" />
-                        </div>
-
-                        <div class="form-group">
-                            <label for="emp_school" class="form-label"> اسم المدرسة (School Name ) <span class="star"> * </span> </label>
-                            <select name="emp_school" id="emp_school">
-                                <option value=""> -- اختر -- </option>
-                                <?php
-                                $stmt = $connect->prepare("SELECT * FROM schools");
-                                $stmt->execute();
-                                $alldata = $stmt->fetchAll();
-                                foreach ($alldata as $data) { ?>
-                                    <option <?php if ($data['name'] == $emp_data['emp_school']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
-                                <?php
-                                }
-
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="emp_job" class="form-label">الوظيفة(Job) <span class="star"> * </span> </label>
-                            <select name="emp_job" id="emp_job">
-                                <option value=""> -- اختر -- </option>
-                                <?php
-                                $stmt = $connect->prepare("SELECT * FROM jobs");
-                                $stmt->execute();
-                                $alldata = $stmt->fetchAll();
-                                foreach ($alldata as $data) { ?>
-                                    <option <?php if ($data['name'] == $emp_data['emp_job']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
-                                <?php
-                                }
-
-                                ?>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="emp_specialist" class="form-label"> التخصص (Specialist) <span class="star"> * </span> </label>
-                            <select name="emp_specialist" id="emp_specialist">
-                                <option value=""> -- التخصص -- </option>
-                                <?php
-                                $stmt = $connect->prepare("SELECT * FROM specialist");
-                                $stmt->execute();
-                                $alldata = $stmt->fetchAll();
-                                foreach ($alldata as $data) { ?>
-                                    <option <?php if ($data['name'] == $emp_data['emp_specialist']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
-                                <?php
-                                }
-
-                                ?>
-                            </select>
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="exper_school" class="form-label"> سنوات الخبرة لدينا (Experience in our School) <span class="star"> * </span> </label>
-                            <input maxlength="10" type="number" name="exper_school" id="exper_school" value="<?php echo $emp_data['exper_school']; ?>" />
-                        </div>
-
-                        <div class="form-row">
-                            <label for="" class="form-label"> تاريخ التسجيل بالتأمينات (Insurance Start Date) <span class="star">*</span> </label>
-
+                    <div class="print_content">
+                        <div class="fieldset-content">
                             <div class="form-flex">
                                 <div class="form-group">
-
-                                    <label class="form-label">التاريخ بالميلادي</label>
-                                    <div id="cal-1" class="select_date">
+                                    <label class="form-label"> الاسم بالكامل ( Full Name ) <span class="star"> * </span></label>
+                                    <input type="text" name="emp_name" id="name" value="<?php echo $emp_data['emp_name']; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="emp_school" class="form-label"> اسم المدرسة (School Name ) <span class="star"> * </span> </label>
+                                    <select name="emp_school" id="emp_school">
+                                        <option value=""> -- اختر -- </option>
                                         <?php
-                                        if (empty($emp_data['insurance_start_date_m'])) { ?>
-                                            <input id="date-1" type="text" name="insurance_start_date_m" value="<?php echo $emp_data['insurance_start_date_m']; ?>" />
-                                            <button class="icon-button showcall1" id="btn1" onclick="showCal1();">&#x25a6;</button>
-
+                                        $stmt = $connect->prepare("SELECT * FROM schools");
+                                        $stmt->execute();
+                                        $alldata = $stmt->fetchAll();
+                                        foreach ($alldata as $data) { ?>
+                                            <option <?php if ($data['name'] == $emp_data['emp_school']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
                                         <?php
-
-                                        } else { ?>
-
-                                            <input type="text" name="insurance_start_date_m" value="<?php echo $emp_data['insurance_start_date_m']; ?>" />
-                                        <?php
-
                                         }
 
                                         ?>
-
-                                    </div>
-                                    <!-- <input type="text" name="first_name" id="first_name" /> -->
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label class="form-label">التاريخ الهجري</label>
-                                    <div id="cal-2" class="select_date">
+                                    <label for="emp_job" class="form-label">الوظيفة(Job) <span class="star"> * </span> </label>
+                                    <select name="emp_job" id="emp_job">
+                                        <option value=""> -- اختر -- </option>
                                         <?php
-                                        if (empty($emp_data['insurance_start_date_h'])) {
+                                        $stmt = $connect->prepare("SELECT * FROM jobs");
+                                        $stmt->execute();
+                                        $alldata = $stmt->fetchAll();
+                                        foreach ($alldata as $data) { ?>
+                                            <option <?php if ($data['name'] == $emp_data['emp_job']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
+                                        <?php
+                                        }
+
                                         ?>
-                                            <input id="date-2" type="text" name="insurance_start_date_h" value="<?php echo $emp_data['insurance_start_date_h']; ?>" />
-                                            <button class="icon-button showcall1" id="btn1" onclick="showCal2();">&#x25a6;</button>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-flex">
+                                <div class="form-group">
+                                    <label for="emp_specialist" class="form-label"> التخصص (Specialist) <span class="star"> * </span> </label>
+                                    <select name="emp_specialist" id="emp_specialist">
+                                        <option value=""> -- التخصص -- </option>
+                                        <?php
+                                        $stmt = $connect->prepare("SELECT * FROM specialist");
+                                        $stmt->execute();
+                                        $alldata = $stmt->fetchAll();
+                                        foreach ($alldata as $data) { ?>
+                                            <option <?php if ($data['name'] == $emp_data['emp_specialist']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
+                                        <?php
+                                        }
+
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exper_school" class="form-label"> سنوات الخبرة لدينا (Experience in our School) <span class="star"> * </span> </label>
+                                    <input maxlength="10" type="number" name="exper_school" id="exper_school" value="<?php echo $emp_data['exper_school']; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="job_in_insurance" class="form-label"> الوظيفة بالتأمينات (Job In Insurance) <span class="star"> * </span> </label>
+                                    <select name="job_in_insurance" id="job_in_insurance">
+                                        <option value=""> -- اختر -- </option>
+                                        <?php
+                                        $stmt = $connect->prepare("SELECT * FROM job_insurance");
+                                        $stmt->execute();
+                                        $alldata = $stmt->fetchAll();
+                                        foreach ($alldata as $data) { ?>
+                                            <option <?php if ($data['name'] == $emp_data['job_in_insurance']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label for="" class="form-label"> تاريخ التسجيل بالتأمينات (Insurance Start Date) <span class="star">*</span> </label>
+
+                                <div class="form-flex">
+                                    <div class="form-group">
+ 
+                                        <div id="cal-1" class="select_date">
+                                            <?php
+                                            if (empty($emp_data['insurance_start_date_m'])) { ?>
+                                                <input id="date-1" type="text" name="insurance_start_date_m" value="<?php echo $emp_data['insurance_start_date_m']; ?>" />
+                                                <button class="icon-button showcall1" id="btn1" onclick="showCal1();">&#x25a6;</button>
+
+                                            <?php
+
+                                            } else { ?>
+
+                                                <input type="text" name="insurance_start_date_m" value="<?php echo $emp_data['insurance_start_date_m']; ?>" />
+                                            <?php
+
+                                            }
+
+                                            ?>
+
+                                        </div>
+                                        <!-- <input type="text" name="first_name" id="first_name" /> -->
+                                    </div>
+                                    <div class="form-group"> 
+                                        <div id="cal-2" class="select_date">
+                                            <?php
+                                            if (empty($emp_data['insurance_start_date_h'])) {
+                                            ?>
+                                                <input id="date-2" type="text" name="insurance_start_date_h" value="<?php echo $emp_data['insurance_start_date_h']; ?>" />
+                                                <button class="icon-button showcall1" id="btn1" onclick="showCal2();">&#x25a6;</button>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <input type="text" name="insurance_start_date_h" value="<?php echo $emp_data['insurance_start_date_h']; ?>" />
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <!-- <input type="text" name="first_name" id="first_name" /> -->
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <label for="" class="form-label"> بداية العقد الالكتروني (Electronic Contarct Starting) <span class="star"> * </span> </label>
+                                <div class="form-flex">
+                                    <div class="form-group"> 
+                                        <div id="cal-3" class="select_date">
+                                            <?php
+                                            if (empty($emp_data['electronic_contract_start_m'])) { ?>
+
+                                                <input id="date-3" type="text" name="electronic_contract_start_m" value="<?php echo $emp_data['electronic_contract_start_m']; ?>" />
+                                                <button class="icon-button showcall1" onclick="showCal3();">&#x25a6;</button>
+                                            <?php
+                                            } else { ?>
+                                                <input id="" type="text" name="electronic_contract_start_m" value="<?php echo $emp_data['electronic_contract_start_m']; ?>" />
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <!-- <input type="text" name="first_name" id="first_name" /> -->
+                                    </div>
+                                    <div class="form-group"> 
+
+                                        <div id="cal-4" class="select_date">
+                                            <?php
+                                            if (empty($emp_data['electronic_contract_start_h'])) {
+                                            ?>
+                                                <input id="date-4" type="text" name="electronic_contract_start_h" value="<?php echo $emp_data['electronic_contract_start_h']; ?>" />
+                                                <button class="icon-button showcall1" onclick="showCal4();">&#x25a6;</button>
+                                            <?php
+                                            } else {
+                                            ?>
+                                                <input type="text" name="electronic_contract_start_h" value="<?php echo $emp_data['electronic_contract_start_h']; ?>" />
+                                            <?php
+                                            }
+                                            ?>
+                                        </div>
+                                        <!-- <input type="text" name="first_name" id="first_name" /> -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <label for="" class="form-label">نهاية العقد الالكتروني(Electronic Contarct Ending) <span class="star"> * </span> </label>
+
+                                <div class="form-flex">
+                                    <div class="form-group"> 
+                                        <div id="cal-5" class="select_date">
+                                            <?php
+                                            if (empty($emp_data['electronic_contract_end_m'])) { ?>
+                                                <input id="date-5" type="text" name="electronic_contract_end_m" value="<?php echo $emp_data['electronic_contract_end_m']; ?>" />
+                                                <button class="icon-button showcall1" onclick="showCal5();">&#x25a6;</button>
+
+
+                                            <?php
+
+                                            } else { ?>
+                                                <input type="text" name="electronic_contract_end_m" value="<?php echo $emp_data['electronic_contract_end_m']; ?>" />
+
+                                            <?php
+
+                                            }
+
+                                            ?>
+
+                                        </div>
+                                        <!-- <input type="text" name="first_name" id="first_name" /> -->
+                                    </div>
+                                    <div class="form-group"> 
+
+                                        <div id="cal-6" class="select_date">
+                                            <?php
+                                            if (empty($emp_data['electronic_contract_end_h'])) {
+                                            ?>
+                                                <input id="date-6" type="text" name="electronic_contract_end_h" value="<?php echo $emp_data['electronic_contract_end_h']; ?>" />
+                                                <button class="icon-button showcall1" onclick="showCal6();">&#x25a6;</button>
+
+                                            <?php
+                                            } else { ?>
+                                                <input type="text" name="electronic_contract_end_h" value="<?php echo $emp_data['electronic_contract_end_h']; ?>" />
+
+                                            <?php
+
+                                            }
+
+                                            ?>
+
+                                        </div>
+                                        <!-- <input type="text" name="first_name" id="first_name" /> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-flex">
+                                <div class="form-group">
+                                    <label class="form-label">الراتب الأساسي( Basic Salary) <span class="star"> * </span></label>
+                                    <input class="basic_salary" type="text" name="basic_salary" id="name" value="<?php echo $emp_data['basic_salary']; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> بدل السكن ( Housing ) <span class="star"> * </span></label>
+                                    <input class="housing" type="text" name="housing" id="housing" value="<?php echo $emp_data['housing']; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> بدلات أخرى ( Other Earns ) <span class="star"> * </span></label>
+                                    <input class="other_earns" type="text" name="other_earns" id="other_earns" value="<?php echo $emp_data['other_earns']; ?>" />
+                                </div>
+                            </div>
+
+                            <div class="form-flex">
+                                <div class="form-group">
+                                    <label class="form-label">إجمالي الراتب( Total ) <span class="star"> * </span></label>
+                                    <input class="total" type="text" name="total" id="total" value="<?php echo $emp_data['total']; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> خصم التأمينات ( Insurance Deduct ) <span class="star"> * </span></label>
+                                    <input type="text" class="insurance_deduce" name="insurance_deduce" id="insurance_deduce" value="<?php echo $emp_data['insurance_deduce']; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> صافي الراتب( Net Of Salary ) <span class="star"> * </span></label>
+                                    <input type="text" class="net_of_insurance" name="net_of_insurance" id="net_of_insurance" value="<?php echo $emp_data['net_of_insurance']; ?>" />
+                                </div>
+
+                            </div>
+
+                            <div class="form-flex">
+                                <div class="form-group">
+                                    <label class="form-label"> إضافي كاش ( Cash ) <span class="star"> * </span></label>
+                                    <input type="text" class="cash" name="cash" id="cash" value="<?php echo $emp_data['cash']; ?>" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label"> إجمالي المُستلم ( Total Get ) <span class="star"> * </span></label>
+                                    <input type="text" class="total_get" name="total_get" id="total_get" value="<?php echo $emp_data['total_get']; ?>" />
+                                </div>
+                                <div class="form-group"> <!-- daam_elig  -->
+                                    <label class="form-label"> أهلية الدعم ( Daam Ability ) <span class="star"> * </span></label>
+                                    <select name="daam_ability" id="daam_ability">
+                                        <option value=""> -- اختر -- </option>
+                                        <?php
+                                        $stmt = $connect->prepare("SELECT * FROM daam_elig");
+                                        $stmt->execute();
+                                        $alldata = $stmt->fetchAll();
+                                        foreach ($alldata as $data) { ?>
+                                            <option <?php if ($data['name'] == $emp_data['daam_ability']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <?php ?>
+                                </div>
+                            </div>
+
+                            <div class="form-flex">
+                                <div class="form-group"> <!-- Support -->
+                                    <label class="form-label">نوع الدعم ( Daam Kind ) <span class="star"> * </span></label>
+                                    <select name="daam_kind" id="daam_kind">
+                                        <option value=""> -- اختر -- </option>
+                                        <?php
+                                        $stmt = $connect->prepare("SELECT * FROM daam_support");
+                                        $stmt->execute();
+                                        $alldata = $stmt->fetchAll();
+                                        foreach ($alldata as $data) { ?>
+                                            <option <?php if ($data['name'] == $emp_data['daam_kind']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> تاريخ بداية الدعم ( Daam Start Date ) <span class="star"> * </span></label>
+                                    <input type="date" class="daam_start_date" name="daam_start_date" id="daam_start_date" value="<?php echo $emp_data['daam_start_date']; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label"> تاريخ نهاية الدعم ( Daam end Date ) <span class="star"> * </span></label>
+                                    <input type="date" class="daam_end_date" name="daam_end_date" id="daam_end_date" value="<?php echo $emp_data['daam_end_date']; ?>" />
+                                </div>
+                            </div>
+                            <div class="form-flex">
+                                <div class="form-group">
+                                    <label class="form-label"> متبقى على نهاية الدعم ( Expire Month Reminder ) (بالايام) <span class="star"> * </span></label>
+                                    <input type="text" class="expire_month_reminder" name="expire_month_reminder" id="expire_month_reminder" value="<?php echo $emp_data['expire_month_reminder']; ?>" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">حالة الدعم( Daam Status ) </label>
+                                    <p class="daam_status">
+                                        <?php
+                                        if ($emp_data['expire_month_reminder'] >= 180) { ?>
+                                            <span style="background-color: green;"> </span>
+                                        <?php
+
+                                        } elseif ($emp_data['expire_month_reminder'] >= 90 || $emp_data['expire_month_reminder'] <= 179) {
+                                        ?>
+                                            <span style="background-color: yellow;"> </span>
+                                        <?php
+                                        } elseif ($emp_data['expire_month_reminder'] <= 90) {
+                                        ?>
+                                            <span style="background-color: red;"> </span>
                                         <?php
                                         } else {
                                         ?>
-                                            <input type="text" name="insurance_start_date_h" value="<?php echo $emp_data['insurance_start_date_h']; ?>" />
+                                            <span style="background-color: black;"> </span>
+
                                         <?php
                                         }
+
+
                                         ?>
-                                    </div>
-                                    <!-- <input type="text" name="first_name" id="first_name" /> -->
+
+                                    </p>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="job_in_insurance" class="form-label"> الوظيفة بالتأمينات (Job In Insurance) <span class="star"> * </span> </label>
-                            <select name="job_in_insurance" id="job_in_insurance">
-                                <option value=""> -- اختر -- </option>
-                                <?php
-                                $stmt = $connect->prepare("SELECT * FROM job_insurance");
-                                $stmt->execute();
-                                $alldata = $stmt->fetchAll();
-                                foreach ($alldata as $data) { ?>
-                                    <option <?php if ($data['name'] == $emp_data['job_in_insurance']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                        </div>
-                        <div class="form-row">
-                            <label for="" class="form-label"> بداية العقد الالكتروني (Electronic Contarct Starting) <span class="star"> * </span> </label>
-                            <div class="form-flex">
-                                <div class="form-group">
-                                    <label class="form-label">التاريخ بالميلادي</label>
-                                    <div id="cal-3" class="select_date">
-                                        <?php
-                                        if (empty($emp_data['electronic_contract_start_m'])) { ?>
 
-                                            <input id="date-3" type="text" name="electronic_contract_start_m" value="<?php echo $emp_data['electronic_contract_start_m']; ?>" />
-                                            <button class="icon-button showcall1" onclick="showCal3();">&#x25a6;</button>
-                                        <?php
-                                        } else { ?>
-                                            <input id="" type="text" name="electronic_contract_start_m" value="<?php echo $emp_data['electronic_contract_start_m']; ?>" />
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
-                                    <!-- <input type="text" name="first_name" id="first_name" /> -->
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">التاريخ بالهجري</label>
-
-                                    <div id="cal-4" class="select_date">
-                                        <?php
-                                        if (empty($emp_data['electronic_contract_start_h'])) {
-                                        ?>
-                                            <input id="date-4" type="text" name="electronic_contract_start_h" value="<?php echo $emp_data['electronic_contract_start_h']; ?>" />
-                                            <button class="icon-button showcall1" onclick="showCal4();">&#x25a6;</button>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            <input type="text" name="electronic_contract_start_h" value="<?php echo $emp_data['electronic_contract_start_h']; ?>" />
-                                        <?php
-                                        }
-                                        ?>
-                                    </div>
-                                    <!-- <input type="text" name="first_name" id="first_name" /> -->
-                                </div>
+                            <div class="form-group">
+                                <label class="form-label"> ملاحظات (Notes) <span class="star"> * </span></label>
+                                <textarea name="notes" id="" class="form-control"> <?php echo $emp_data['notes']; ?></textarea>
                             </div>
                         </div>
-
-                        <div class="form-row">
-                            <label for="" class="form-label">نهاية العقد الالكتروني(Electronic Contarct Ending) <span class="star"> * </span> </label>
-
-                            <div class="form-flex">
-                                <div class="form-group">
-                                    <label class="form-label">التاريخ بالميلادي</label>
-                                    <div id="cal-5" class="select_date">
-                                        <?php
-                                        if (empty($emp_data['electronic_contract_end_m'])) { ?>
-                                            <input id="date-5" type="text" name="electronic_contract_end_m" value="<?php echo $emp_data['electronic_contract_end_m']; ?>" />
-                                            <button class="icon-button showcall1" onclick="showCal5();">&#x25a6;</button>
-
-
-                                        <?php
-
-                                        } else { ?>
-                                            <input type="text" name="electronic_contract_end_m" value="<?php echo $emp_data['electronic_contract_end_m']; ?>" />
-
-                                        <?php
-
-                                        }
-
-                                        ?>
-
-                                    </div>
-                                    <!-- <input type="text" name="first_name" id="first_name" /> -->
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">التاريخ بالهجري</label>
-
-                                    <div id="cal-6" class="select_date">
-                                        <?php
-                                        if (empty($emp_data['electronic_contract_end_h'])) {
-                                        ?>
-                                            <input id="date-6" type="text" name="electronic_contract_end_h" value="<?php echo $emp_data['electronic_contract_end_h']; ?>" />
-                                            <button class="icon-button showcall1" onclick="showCal6();">&#x25a6;</button>
-
-                                        <?php
-                                        } else { ?>
-                                            <input type="text" name="electronic_contract_end_h" value="<?php echo $emp_data['electronic_contract_end_h']; ?>" />
-
-                                        <?php
-
-                                        }
-
-                                        ?>
-
-                                    </div>
-                                    <!-- <input type="text" name="first_name" id="first_name" /> -->
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">الراتب الأساسي( Basic Salary) <span class="star"> * </span></label>
-                            <input class="basic_salary" type="text" name="basic_salary" id="name" value="<?php echo $emp_data['basic_salary']; ?>" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label"> بدل السكن ( Housing ) <span class="star"> * </span></label>
-                            <input class="housing" type="text" name="housing" id="housing" value="<?php echo $emp_data['housing']; ?>" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label"> بدلات أخرى ( Other Earns ) <span class="star"> * </span></label>
-                            <input class="other_earns" type="text" name="other_earns" id="other_earns" value="<?php echo $emp_data['other_earns']; ?>" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">إجمالي الراتب( Total ) <span class="star"> * </span></label>
-                            <input class="total" type="text" name="total" id="total" value="<?php echo $emp_data['total']; ?>" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label"> خصم التأمينات ( Insurance Deduct ) <span class="star"> * </span></label>
-                            <input type="text" class="insurance_deduce" name="insurance_deduce" id="insurance_deduce" value="<?php echo $emp_data['insurance_deduce']; ?>" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label"> صافي الراتب( Net Of Salary ) <span class="star"> * </span></label>
-                            <input type="text" class="net_of_insurance" name="net_of_insurance" id="net_of_insurance" value="<?php echo $emp_data['net_of_insurance']; ?>" />
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label"> إضافي كاش ( Cash ) <span class="star"> * </span></label>
-                            <input type="text" class="cash" name="cash" id="cash" value="<?php echo $emp_data['cash']; ?>" />
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label"> إجمالي المُستلم ( Total Get ) <span class="star"> * </span></label>
-                            <input type="text" class="total_get" name="total_get" id="total_get" value="<?php echo $emp_data['total_get']; ?>" />
-                        </div>
-                        <div class="form-group"> <!-- daam_elig  -->
-                            <label class="form-label"> أهلية الدعم ( Daam Ability ) <span class="star"> * </span></label>
-                            <select name="daam_ability" id="daam_ability">
-                                <option value=""> -- اختر -- </option>
-                                <?php
-                                $stmt = $connect->prepare("SELECT * FROM daam_elig");
-                                $stmt->execute();
-                                $alldata = $stmt->fetchAll();
-                                foreach ($alldata as $data) { ?>
-                                    <option <?php if ($data['name'] == $emp_data['daam_ability']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-                            <?php ?>
-                        </div>
-                        <div class="form-group"> <!-- Support -->
-                            <label class="form-label">نوع الدعم ( Daam Kind ) <span class="star"> * </span></label>
-                            <select name="daam_kind" id="daam_kind">
-                                <option value=""> -- اختر -- </option>
-                                <?php
-                                $stmt = $connect->prepare("SELECT * FROM daam_support");
-                                $stmt->execute();
-                                $alldata = $stmt->fetchAll();
-                                foreach ($alldata as $data) { ?>
-                                    <option <?php if ($data['name'] == $emp_data['daam_kind']) echo "selected"; ?> value="<?php echo $data['name']; ?>"> <?php echo $data['name']; ?> </option>
-                                <?php
-                                }
-                                ?>
-                            </select>
-
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label"> تاريخ بداية الدعم ( Daam Start Date ) <span class="star"> * </span></label>
-                            <input type="date" class="daam_start_date" name="daam_start_date" id="daam_start_date" value="<?php echo $emp_data['daam_start_date']; ?>" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label"> تاريخ نهاية الدعم ( Daam end Date ) <span class="star"> * </span></label>
-                            <input type="date" class="daam_end_date" name="daam_end_date" id="daam_end_date" value="<?php echo $emp_data['daam_end_date']; ?>" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label"> متبقى على نهاية الدعم ( Expire Month Reminder ) (بالايام) <span class="star"> * </span></label>
-                            <input type="text" class="expire_month_reminder" name="expire_month_reminder" id="expire_month_reminder" value="<?php echo $emp_data['expire_month_reminder']; ?>" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">حالة الدعم( Daam Status ) </label>
-                            <p class="daam_status">
-                                <?php
-                                if ($emp_data['expire_month_reminder'] >= 180) { ?>
-                                    <span style="background-color: green;"> </span>
-                                <?php
-
-                                } elseif ($emp_data['expire_month_reminder'] >= 90 || $emp_data['expire_month_reminder'] <= 179) {
-                                ?>
-                                    <span style="background-color: yellow;"> </span>
-                                <?php
-                                } elseif ($emp_data['expire_month_reminder'] <= 90) {
-                                ?>
-                                    <span style="background-color: red;"> </span>
-                                <?php
-                                } else {
-                                ?>
-                                    <span style="background-color: black;"> </span>
-
-                                <?php
-                                }
-
-
-                                ?>
-
-                            </p>
-                        </div>
-                        <!--
-                        <div class="form-group">
-                            <label for="daam_status" class="form-label">حالة الدعم( Daam Status )<span class="star"> * </span> </label>
-                            <select name="daam_status" id="daam_status">
-                                <option value=""> -- اختر -- </option>
-                                <option <?php if ($emp_data['daam_status'] == 'احمر') echo 'selected'; ?> value="احمر"> احمر </option>
-                                <option <?php if ($emp_data['daam_status'] == 'اصفر') echo 'selected'; ?> value="اصفر"> اصفر </option>
-                                <option <?php if ($emp_data['daam_status'] == 'اخضر') echo 'selected'; ?> value="اخضر"> اخضر </option>
-                            </select>
-                        </div>
-                            -->
-                        <div class="form-group">
-                            <label class="form-label"> ملاحظات (Notes) <span class="star"> * </span></label>
-                            <textarea name="notes" id="" class="form-control"> <?php echo $emp_data['notes']; ?></textarea>
-                        </div>
-                        <button class="btn btn-primary" type="submit"> تعديل <i class="fa fa-pen"></i> </button>
 
                     </div>
-
+                    <button class="btn btn-primary" type="submit"> تعديل <i class="fa fa-pen"></i> </button>
+                    <p class="printbtn btn btn-warning"> طباعه <i class="fa fa-print"></i></p>
                 </div>
             </form>
         </div>

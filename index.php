@@ -384,7 +384,7 @@
 
                                         <div id="cal-2" class="select_date">
                                             <input required id="date-2" type="text" name="emp_id_expire_date_h" />
-                                            <button class="icon-button showcall1" onclick="showCal2();">&#x25a6;</button>
+                                            <button class="icon-butont showcall1" onclick="showCal2();">&#x25a6;</button>
                                         </div>
                                         <!-- <input type="text" name="first_name" id="first_name" /> -->
                                     </div>
@@ -876,7 +876,10 @@
     });
     $(".printbtn").click(function(e) {
         e.preventDefault();
-    })
+    });
+    $(".calendar .date-grid .selected-date").click(function(){
+        $(".calendar").hide();
+    });
     var cal1 = new Calendar(),
         cal2 = new Calendar(true, 0, false, true),
         date1 = document.getElementById('date-1'),
